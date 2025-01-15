@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sign Up</h1>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if success %}
+        <p class="success">{{ success }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {% if form %}
+            {{ form.as_p }}
+        {% else %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="balance">Balance:</label>
+            <input type="number" id="balance" name="balance" required><br><br>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br><br>
+        {% endif %}
+
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+</html>

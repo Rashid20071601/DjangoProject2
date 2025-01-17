@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from .models import *
 
 # Create your views here.
 def main(request):
     return render(request, 'platform.html')
+
 
 def choice(request):
     GAME = Game.objects.all()
@@ -17,6 +19,7 @@ def choice(request):
         'games': games
     }
     return render(request, 'game.html', context)
+
 
 def cart(request):
     return render(request, 'cart.html')
@@ -51,3 +54,20 @@ def sign_up(request):
     context.update(info)
 
     return render(request, 'registration_page.html', context)
+
+
+def news_list(request):
+    # получаем все посты
+    news = News.objects.all()
+
+    # создаем пагинатор
+    paginator = Paginator(news, 2)  # 2 поста на странице
+
+    # получаем номер страницы, на которую переходит пользователь
+    page_number = request.GET.get('page')
+
+    # получаем посты для текущей страницы
+    page_news = paginator.get_page(page_number)
+
+    # передаем контекст в шаблон
+    return render(request, 'news.html', {'page_news': page_news})

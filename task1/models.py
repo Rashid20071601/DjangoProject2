@@ -16,3 +16,8 @@ class Game(models.Model):
     description = models.TextField()
     age_limitid = models.BooleanField(default=False)
     buyer = models.ManyToManyField(Buyer, related_name='buyer')
+
+class News(models.Model):
+    title = models.CharField(max_length=155)
+    content = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)

@@ -22,3 +22,4 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ('title', 'content')   # Отображение полей title и content при отображении всех полей списком.
     list_filter = ('title',)   # Фильтрация по полю title.
     readonly_fields = ('date',)   # Доступным только для чтения поле date.
+
